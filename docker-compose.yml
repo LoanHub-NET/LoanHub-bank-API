@@ -1,0 +1,6 @@
+services:
+  loanhub.bank.api:
+    image: ${DOCKER_REGISTRY-}loanhubbankapi
+    build:
+      context: .
+      dockerfile: src/LoanHub.Bank.Api/Dockerfile
