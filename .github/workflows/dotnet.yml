@@ -1,0 +1,31 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore LoanHub.BankAPI.sln
+    - name: Build
+      run: dotnet build LoanHub.BankAPI.sln --configuration Release --no-restore
+    - name: Test
+      run: dotnet test LoanHub.BankAPI.sln --configuration Release --no-build --verbosity normal
+    - name: Publish API
+      run: dotnet publish src/LoanHub.Bank.Api/LoanHub.Bank.Api.csproj -c Release -o ./publish
+      
