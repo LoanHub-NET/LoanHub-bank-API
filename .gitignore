@@ -5,6 +5,11 @@
 
 docker-compose.override.yml
 
+# Local environment variables (Docker Compose)
+.env
+.env.*
+!.env.example
+
 # User-specific files
 *.rsuser
 *.suo
